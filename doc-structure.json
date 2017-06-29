@@ -1,0 +1,41 @@
+{
+  "occurrence": {
+    "date_of_occurrence": "02.06.2002",
+    "local_time_of_occurrence": "03:30",
+    "location_of_occurrence": "Itali-Milano",
+    "description": "Blla blla blla blla blla  blla blla blla blla  blla blla blla blla ",
+    "operator": {
+      "operator_name": "Federal Aviation",
+      "flight": {
+        "flight_date": "05.07.2007 03:50",
+        "flight_number": 30024,
+        "departure": {
+          "departure_airport": "Prishtina",
+          "destination_airport": "Milano",
+          "aircraft": {
+            "aircraft_type": "Boeing 737-800",
+            "aircraft_registration": 15546564216
+          },
+          "goods":{
+            "packing_group": {"division1": 1, "division": 2},
+            "origin_of_the_goods:": "Italy,milano",
+            "proper_shipping_name": " UN 1090, ACETONE",
+            "class_and_division": "hell",
+            "subsidary_risk": "turbulence",
+            "quantity_or_index": 18,
+            "Reference_no": 132456,
+            "name_and_adrress_of_shipper":  "Filan fisteku/Agim Ramadani/1"
+          }
+        }
+      }
+    },
+    "reporter":{
+      "reporter_name": "Filan Fisteku",
+      "tel": 2344123456,
+      "company_dept": "",
+      "reporter_ref": "",
+      "address": "",
+      "Date/Signature": ""
+    }
+  }
+}
