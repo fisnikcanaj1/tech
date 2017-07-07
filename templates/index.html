@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="Fisnik Canaj">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAA</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='style/style.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
+  </head>
+  <body>
+
+    <header>
+        <h1 class="text-center">Dangerous Goods Occurrence Repost</h1>
+    </header>
+
+
+      <form class="main-form" method="POST">
+        <section class="container form-section">
+          <section class="container confirm-section text-center">
+            <p>Are you concerned about the confidentiality of this report and wish to be contacted before it is processed?
+      If so, please ensure you provide us with your contact details.<p>
+            <h4>CONFIDENTIAL?</h4>
+            <label for="yes">Yes</label>
+            <input type="radio" name="confidential" value="yes" id="yes">
+            <label for="no">No</label>
+            <input type="radio" name="confidential" value="no" id="no">
+          </section>
+        <br/>
+        <br/>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <div class="row">
+              <label class="col-xs-10" for="operator" title="Required">Operator: * </label>
+              <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="An air operator's certificate (AOC) is the approval granted by a national"> ?</a>
+            </div>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="operator_name" placeholder="Operator name" id="operator">
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="occurrence" title="Required">Date of occurrence: * </label>
+            <p class="error-message"></p>
+            <input type="date" name="occurrence" class="form-control" id="occurrence">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="local" title="Required">Local time of occurrence: * </label>
+            <p class="error-message"></p>
+            <input type="time" name="local" class="form-control" id="local">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="flight-date" title="Required">Flight date: * </label>
+            <p class="error-message"></p>
+            <input class="form-control" name="flight-date" type="datetime-local" id="flight-date"></input>
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="flight-number" title="Required">Flight number: * </label>
+            <p class="error-message"></p>
+            <input type="number" class="form-control" name="flight-number" value="" id="flight-number">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="departure" title="Required">Departure airport: * </label>
+            <p class="error-message"></p>
+            <select class="form-control" name="departure" id="departure">
+              <option value="">Choose departure airport</option>
+              <option value="Italy/Milano">Italy/Milano</option>
+              <option value="Kosov/Prishtin">Kosov/Prishtin</option>
+              <option value="Austri/Viena">Austri/Viena</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="destination" title="Required">Destination airport: * </label>
+            <p class="error-message"></p>
+            <select class="form-control" name="destination" id="destination">
+              <option value="">Choose destination airport</option>
+              <option value="
+              Italy/Milano">Italy/Milano</option>
+              <option value="Kosov/Prishtin">Kosov/Prishtin</option>
+              <option value="Austri/Viena">Austri/Viena</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="aircraft-type" title="Required">Aircraft type: * </label>
+            <p class="error-message"></p>
+            <select class="form-control" name="aircraft-type" id="aircraft-type">
+              <option value="">Choose aircraft type</option>
+              <option value="Airbus A300">Airbus A300 medium-range widebody airliner</option>
+              <option value="Airbus A310">Airbus A310 widebody airliner.</option>
+              <option value="Airbus A318">Airbus A318 100-seat airliner</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="aircraft-registration" title="Required">Aircraft registration: * </label>
+            <p class="error-message"></p>
+            <input type="number" class="form-control" name="aircraft-registration" value="" id="aircraft-registration">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-6">
+            <div class="row">
+              <label for="location-of-occurrence" title="Required" class="col-xs-10">Location of occurrence: * </label>
+              <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="An air operator's certificate (AOC) is the approval granted by a national"> ?</a>
+            </div>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="location-of-occurrence" value="" id="location-of-occurrence">
+          </div>
+          <div class="form-group col-xs-12 col-sm-6">
+            <label for="origin-of-the-goods" title="Required">Origin of the goods: * </label>
+            <p class="error-message"></p>
+            <select class="form-control" name="origin-of-the-goods" id="origin-of-the-goods">
+              <option value="">Choose origin of the goods</option>
+              <option value="Albania">Albania</option>
+              <option value="Australia">Australia</option>
+              <option value="Australia">Italy</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 ">
+            <label for="description" title="Required">Description: *</label>
+            <p class="error-message"></p>
+            <textarea name="description" class="form-control" rows="8" cols="80" id="description"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4 col-sm-4">
+            <label for="proper-shipping-name" title="Required">Proper shipping name: * </label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="proper-shipping-name" value="" id="proper-shipping-name">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4 col-sm-4">
+            <label for="class-division">Class/division: </label>
+            <p class="error-message"></p>
+            <select class="form-control" name="class-division" id="class-division">
+              <option value="">Choose class/division</option>
+              <option value="division1">Division1</option>
+              <option value="division2">Division2</option>
+              <option value="division3">Division3</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="subsidary-risk">Subsidary risk(s): </label>
+            <p class="error-message"></p>
+            <select class="form-control" name="subsidary-risk" id="subsidary-risk">
+              <option value="">Choose subsidary risk</option>
+              <option value="division1">BATTERY FLUID</option>
+              <option value="division2">ACID</option>
+              <option value="division3">ADHESIVES</option>
+              <option value="division3">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="packing-group" title="Required">Packing group: *</label>
+            <p class="error-message"></p>
+            <select class="form-control" name="packing-group" id="packing-group">
+              <option value="">Choose packing group</option>
+              <option value="division1">First</option>
+              <option value="division2">Second</option>
+              <option value="division3">Third</option>
+              <option value="division3">Forth</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="category" title="Required" >Category, (class 7 only): *</label>
+            <p class="error-message"></p>
+            <select class="form-control" name="category" id="category" disabled>
+              <option value="">Choose category</option>
+              <option value="division1">First</option>
+              <option value="division2">Second</option>
+              <option value="division3">Third</option>
+              <option value="division3">Forth</option>
+            </select>
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="type-of-packaging" title="Required">Type of packaging: *</label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="type-of-packaging" value="" id="type-of-packaging">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="packaging-specification-marking" title="Required">Packaging specification marking: *</label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="packaging-specification-marking" value="" id="packaging-specification-marking">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="no-of-packages" title="Required">No. of packages: *</label>
+            <p class="error-message"></p>
+            <input type="number" class="form-control" name="no-of-packages" value="" id="no-of-packages">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="quantity">Quantity (or transport index, if applicable): </label>
+            <p class="error-message"></p>
+            <input type="number" class="form-control" name="quantity" value="" id="quantity">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="reference-no">Reference no. of Air Waybill: *</label>
+            <p class="error-message"></p>
+            <input type="number" class="form-control" title="Required" name="reference-no" value="" id="reference-no">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <div class="row">
+              <label class="col-xs-10" for="reference-ticket" title="Required">Reference ticket: * </label>
+              <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="Reference no. of courier pouch, baggage tag, or passenger ticket:"> ?</a>
+            </div>
+            <p class="error-message"></p>
+            <input type="number" class="form-control" title="Required" name="reference-ticket" value="" id="reference-ticket">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="name-and-adrress" title="Required">Name and adrress of shipper, agent, passenger, etc.: *</label>
+            <p class="error-message"></p>
+            <input type="text" name="name-and-adrress" class="form-control" value="" id="name-and-adrress">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <label for="other-relevant-information">Other relevant information: </label>
+            <p class="error-message"></p>
+            <textarea name="other-relevant-information" class="form-control" rows="8" cols="80" id="other-relevant-information"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="name-and-title" title="Required">Name and title of person making report: *</label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="name-and-title" value="" id="name-and-title">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="telephone-no" title="Required">Telephone no: *</label>
+            <p class="error-message"></p>
+            <input type="number" name="telephone-no" class="form-control" value="" id="telephone-no" >
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="company-dept-code">Company/dept. code, E-mail or InfoMail code: </label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="company-dept-code" value="" id="company-dept-code">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="reporter-ref" title="Required">Reporter ref.: *</label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="reporter-ref" value=""  id="reporter-ref">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="address" title="Required">Address: *</label>
+            <p class="error-message"></p>
+            <input type="text" name="address" class="form-control" value="" id="address">
+          </div>
+          <div class="form-group col-xs-12 col-sm-4">
+            <label for="date-signature" title="Required">Date/Signature: *</label>
+            <p class="error-message"></p>
+            <input type="text" class="form-control" name="date-signature" value="" id="date-signature">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <label for="description-of-the-occurrence ">Description of the occurrence (continuation):</label>
+            <p class="error-message"></p>
+            <textarea name="description-of-the-occurrence" class="form-control" id="description-of-the-occurrence" rows="8" cols="80"></textarea>
+          </div>
+        </div>
+        <div class="submit">
+            <input type="submit" class="btn btn-success" id="registation" name="" value="Submit">
+        </div>
+      </form>
+      <div class="container">
+        <div class="col-md-12">
+        <table class="table">
+        <thead>
+            <th>Confidential</th>
+            <th>Operator</th>
+            <th>Local Date</th>
+            <th>Actions</th>
+        </thead>
+            <tbody>
+                {% for audit in audits %}
+                <tr>
+                    <td>{{ audit.confidential}}</td>
+                    <td>{{ audit.operator_name }}</td>
+                    <td>{{ audit.local}}</td>
+                    <td><a class="btn btn-success" href="/audit/{{audit._id}}">View</a> <a class="btn btn-danger" href="#">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+     </div>
+      <div class="info-part" id="info">
+        <h3>Notes:</h3>
+        <ol>
+          <li>It is important that this form is completed in as much detail as possible; this will help to avoid delays in processing the report and unnecessary additional work by both the reporter and the CAAK.</li>
+          <li>Any type of dangerous goods occurrence must be reported, irrespective of whether the dangerous goods are contained in cargo, mail or baggage.</li>
+          <li>A dangerous goods accident is an occurrence associated with and related to the transport of dangerous goods which results in fatal or serious injury to a person or major property damage. For this purpose, a serious injury is an injury which is sustained by a person in an accident and which: (a) requires hospitalisation for more than 48 hours, commencing within 7 days from the date the injury was received; or (b) results in a fracture of any bones (except simple fractures of fingers, toes or nose); or (c) involves lacerations which cause severe haemorrhage, nerve, muscle or tendon damage; or (d) involves injury to any internal organ; or (e) involves second or third degree burns, or any burns affecting more than 5% of the body surface; or (f) involves verified exposure to infectious substances or injurious radiation. A dangerous goods accident may also be an aircraft accident; in which case the normal procedure for reporting of air accidents must be followed.</li>
+          <li>A dangerous goods incident is an occurrence, other than a dangerous goods accident, associated with and related to the transport of dangerous goods, not necessarily occurring on board an aircraft, which results in injury to a person, property damage, fire, breakage, spillage, leakage of fluid or radiation or other evidence that the integrity of the packaging has not been maintained. Any occurrence relating to the transport of dangerous goods which seriously jeopardises the aircraft or its occupants is also deemed to constitute a dangerous goods incident.</li>
+          <li>This form should also be used to report any occasion when undeclared or misdeclared dangerous goods are discovered in cargo, mail or unaccompanied baggage or when accompanied baggage contains dangerous goods which passengers or crew are not permitted to take on board aircraft.</li>
+          <li>An initial report should be despatched within 72 hours of the occurrence, to the Authority of the State (a) in which the aircraft is registered (if applicable); and (b) in which the incident occurred, unless exceptional circumstances prevent this. The initial report may be made by any means but a written report should be sent as soon as possible, even if all the information is not available.</li>
+          <li>Copies of all relevant documents and any photographs should be attached to this report.</li>
+          <li>Completed reports must be sent to the Civil Aviation Authority of Kosovo (CAAK), Ahmet Krasniqi Street n.n. (Arbëria), 10000, Prishtina; E-mail address: mor@caa-ks.org , Fax no: +381 (0)38 211 009, Mob no: +377 (0)44 613 567; and any other competent authority required by the Technical Instructions.</li>
+          <li>Providing it is safe to do so, all dangerous goods, packagings, documents, etc, relating to the occurrence must be retained until after the initial report has been sent to the Authorities referred to in 5. and 7. above and they have indicated whether or not these should continue to be retained.</li>
+        </ol>
+        <div class="confidential-reports">
+          <h3>Confidential Reports</h3>
+          <p>An occurrence may be reported confidentially. If the report is ‘CONFIDENTIAL’ please tick the box ‘Yes’ on top of the form to annotate confidentiality of the report, and if it is sent to CAAK’s address, mark the envelope ‘Personal for the Director General of CAAK’. The second copy need not be forwarded to local management. BOXES 20 to 26 should be completed. The CAAK will respect the confidentiality and contact you personally.</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="js/validation.js"></script>
+  </body>
+</html>

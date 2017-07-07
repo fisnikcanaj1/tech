@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Show</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        	<div class="row">
+        		<div class="well">
+              <table class="table">
+                <thead>
+                  <th>Confidential:</th>
+                  <th>Operator name:</th>
+                  <th>Local Date:</th>
+                </thead>
+                <form method="POST">
+                <tbody>
+                 <td><input type="text" name="confidential" value="{{ audit.confidential}}"></td>
+             		 <td><input type="text" name="operator_name" value="{{ audit.operator_name}}"></td>
+             		 <td><input type="date" name="local" value="{{ audit.local}} "></td>
+                 <td><input type="submit" name="" value="Submit">
+                </tbody>
+              </table>
+
+
+      		</div>
+      	</div>
+      </div>
+  </body>
+</html>
