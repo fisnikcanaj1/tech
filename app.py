@@ -21,7 +21,10 @@ def hello_world():
         mongo.db.form.insert({
             "confidential": data["confidential"],
             "operator_name": data["operator_name"],
-            "local": data["local"]
+            "occurrence": data["occurrence"],
+            "local": data["local"],
+            "flight-number": data["flight-number"]
+            
 
         })
 

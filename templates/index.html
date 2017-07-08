@@ -25,7 +25,7 @@
 
 
       <form class="main-form" method="POST">
-        <section class="container form-section">
+        <section class="container well form-section">
           <section class="container confirm-section text-center">
             <p>Are you concerned about the confidentiality of this report and wish to be contacted before it is processed?
       If so, please ensure you provide us with your contact details.<p>
@@ -34,6 +34,7 @@
             <input type="radio" name="confidential" value="yes" id="yes">
             <label for="no">No</label>
             <input type="radio" name="confidential" value="no" id="no">
+            <p id="radio-error"></p>
           </section>
         <br/>
         <br/>
@@ -295,7 +296,7 @@
             <th>Confidential</th>
             <th>Operator</th>
             <th>Local Date</th>
-            <th>Actions</th>
+            <th class="text-center">Actions</th>
         </thead>
             <tbody>
                 {% for audit in audits %}
@@ -303,7 +304,7 @@
                     <td>{{ audit.confidential}}</td>
                     <td>{{ audit.operator_name }}</td>
                     <td>{{ audit.local}}</td>
-                    <td><a class="btn btn-success" href="/audit/{{audit._id}}">View</a> <a class="btn btn-danger" href="#">Delete</a></td>
+                    <td class="text-center"><a class="btn btn-success" href="/audit/{{audit._id}}">View</a> <a class="btn btn-danger" href="#">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -332,6 +333,6 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
-    <script src="js/validation.js"></script>
+    <script src="{{url_for('static', filename='js/validation.js')}}"></script>
   </body>
 </html>
