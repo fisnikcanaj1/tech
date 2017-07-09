@@ -23,17 +23,19 @@ def hello_world():
             "operator_name": data["operator_name"],
             "occurrence": data["occurrence"],
             "local": data["local"],
-            "flight-number": data["flight-number"]
-            
+            "flight-number": data["flight-number"],
+            "departure": data["departure"],
+            "destination": data["destination"]
 
         })
 
         return redirect(url_for('hello_world'))
 
+
 @app.route('/audit/<string:audit_id>', methods=['GET', 'POST'])
 def show(audit_id):
     if request.method == 'GET':
-        # Query to get specific audit
+        # Query to get specific ocations
         audit = mongo.db.form.find_one({"_id": ObjectId(audit_id)})
         return render_template('show.html', audit=audit)
 
@@ -55,5 +57,12 @@ def edit(audit_id):
         })
         return redirect(url_for("show", audit_id=audit_id))
 
+
+@app.route('/audit/delete/<string:audit_id>', methods=['GET', 'POST'])
+def delete(audit_id):
+    if request.method == "GET":
+        # Query to delete specific
+        mongo.db.form.remove({"_id": ObjectId(audit_id)})
+        return redirect(url_for('hello_world'))
 if __name__ == '__main__':
     app.run(port=5006,host='0.0.0.0', debug=True)
