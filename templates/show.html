@@ -12,22 +12,193 @@
       <div class="container">
         	<div class="row">
         		<div class="well">
-              <table class="table">
-                <thead>
-                  <th>Confidential:</th>
-                  <th>Occurrence:</th>
-                  <th>Operator name</th>
-                  <th>Local Date:</th>
-                </thead>
-                <tbody>
-                 <td>{{audit.confidential}}</td>
-                 <td>{{audit.occurrence}}</td>
-                 <td>{{audit.operator_name }}</td>
-             		 <td>{{audit.local}}</td>
-                 <td><a class="btn btn-info" href="/edit/audit/{{audit._id}}">Edit</a></td>
-                </tbody>
-              </table>
+              <form class="main-form" method="POST">
+                <section class="container form-section">
+                  <section class="container confirm-section text-center">
+                    <h4>CONFIDENTIAL?</h4>
+                    {{audit.confidential}}
+                    <p id="radio-error"></p>
+                  </section>
+                <br/>
+                <br/>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-10" for="operator" title="Required">Operator: * </label>
+                    </div>
+                      <p>{{audit.operator_name}}</p>
+                  </div>
 
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="occurrence" title="Required">Date of occurrence: * </label>
+                    <p>{{audit.occurrence}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="local" title="Required">Local time of occurrence: * </label>
+                    <p>{{audit.local}}</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="flight-date" title="Required">Flight date: * </label>
+                    <p>{{audit.flight_date}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="flight-number" title="Required">Flight number: * </label>
+                    <p>{{audit.flight_number}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="departure" title="Required">Departure airport: * </label>
+                    <p class="error-message">{{audit.departure}}</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="destination" title="Required">Destination airport: * </label>
+                    <p>{{audit.destination}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="aircraft-type" title="Required">Aircraft type: * </label>
+                    <p>{{audit.aircraft_type}}</p>
+
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="aircraft-registration" title="Required">Aircraft registration: * </label>
+                    <p class="">{{audit.aircraft_registration}}</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-6">
+                    <div class="row">
+                      <label for="location-of-occurrence" title="Required" class="col-xs-10">Location of occurrence: * </label>                    </div>
+                    <p>{{audit.location_of_occurrence}}</p>
+
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-6">
+                    <label for="origin-of-the-goods" title="Required">Origin of the goods: * </label>
+                    <p>{{audit.origin_of_the_goods}}</p>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 ">
+                    <label for="description" title="Required">Description: *</label>
+                    <p>{{audit.description}}</p>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4 col-sm-4">
+                    <label for="proper-shipping-name" title="Required">Proper shipping name: * </label>
+                    <p>{{audit.proper_shipping_name}}</p>
+
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4 col-sm-4">
+                    <label for="class-division">Class/division: </label>
+                    <p>{{audit.class_division}}</p>
+
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="subsidary-risk">Subsidary risk(s): </label>
+                    <p>{{audit.subsidary_risk}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="packing-group" title="Required">Packing group: *</label>
+                    <p>{{audit.packing_group}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="category" title="Required" >Category, (class 7 only): *</label>
+                    <p>{{audit.category}}</p>
+
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="type-of-packaging" title="Required">Type of packaging: *</label>
+                    <p>{{audit.type_of_packaging}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="packaging-specification-marking" title="Required">Packaging specification marking: *</label>
+                    <p>{{audit.packaging_specification_marking}}</p>
+                    </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="no-of-packages" title="Required">No. of packages: *</label>
+                    <p>{{audit.no_of_packages}}</p>
+                    </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="quantity">Quantity (or transport index, if applicable): </label>
+                    <p>{{audit.quantity}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="reference-no">Reference no. of Air Waybill: *</label>
+                    <p>{{audit.reference_no}}</p>
+                    </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-10" for="reference-ticket" title="Required">Reference ticket: * </label>
+                    </div>
+                    <p>{{audit.reference_ticket}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="name-and-adrress" title="Required">Name and adrress of shipper, agent, passenger, etc.: *</label>
+                    <p>{{audit.name_and_adrress}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="other-relevant-information">Other relevant information: </label>
+                    <p>{{audit.other_relevant_information}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="name-and-title" title="Required">Name and title of person making report: *</label>
+                    <p>{{audit.name_and_title}}</p>
+                    </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="telephone-no" title="Required">Telephone no: *</label>
+                    <p>{{audit.telephone_no}}</p>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="company-dept-code">Company/dept. code, E-mail or InfoMail code: </label>
+                    <p>{{audit.company_dept_code}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="reporter-ref" title="Required">Reporter ref.: *</label>
+                    <p>{{audit.reporter_ref}}</p>
+                    </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="address" title="Required">Address: *</label>
+                    <p>{{audit.address}}</p>
+                    </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="date-signature" title="Required">Date/Signature: *</label>
+                    <p>{{audit.date_signature}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="description-of-the-occurrence ">Description of the occurrence (continuation):</label>
+                    <p>{{audit.description_of_the_occurrence}}</p>
+                    </div>
+                </div>
+                <div class="submit">
+                    <a class="btn btn-info" href="/edit/audit/{{audit._id}}">Edit</a>
+                </div>
+              </form>
 
       		</div>
       	</div>
