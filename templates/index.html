@@ -25,7 +25,7 @@
 
 
       <form class="main-form" method="POST">
-        <section class="container well form-section">
+        <section class="container form-section">
           <section class="container confirm-section text-center">
             <p>Are you concerned about the confidentiality of this report and wish to be contacted before it is processed?
       If so, please ensure you provide us with your contact details.<p>
@@ -304,7 +304,8 @@
                     <td>{{ audit.confidential}}</td>
                     <td>{{ audit.operator_name }}</td>
                     <td>{{ audit.local}}</td>
-                    <td class="text-center"><a class="btn btn-success" href="/audit/{{audit._id}}">View</a> <a class="btn btn-danger" href="/audit/{{audit._id}}">Delete</a></td>
+
+                    <td class="text-center"><a class="btn btn-success" href="/audit/{{audit._id}}">View</a> <a class="btn btn-danger" href="/delete/{{audit._id}}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

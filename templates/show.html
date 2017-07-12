@@ -15,13 +15,15 @@
               <table class="table">
                 <thead>
                   <th>Confidential:</th>
-                  <th>Operator name:</th>
+                  <th>Occurrence:</th>
+                  <th>Operator name</th>
                   <th>Local Date:</th>
                 </thead>
                 <tbody>
-                 <td>{{ audit.confidential}}</td>
-             		 <td>{{ audit.operator_name}}</td>
-             		 <td>{{ audit.local}}</td>
+                 <td>{{audit.confidential}}</td>
+                 <td>{{audit.occurrence}}</td>
+                 <td>{{audit.operator_name }}</td>
+             		 <td>{{audit.local}}</td>
                  <td><a class="btn btn-info" href="/edit/audit/{{audit._id}}">Edit</a></td>
                 </tbody>
               </table>

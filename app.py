@@ -51,6 +51,7 @@ def edit(audit_id):
 
         mongo.db.form.update({"_id": ObjectId(audit_id)}, {"$set":{
             "confidential": edit_data["confidential"],
+            "occurrence": edit_data["occurrence"],
             "operator_name": edit_data["operator_name"],
             "local": edit_data["local"]
             }
@@ -58,11 +59,12 @@ def edit(audit_id):
         return redirect(url_for("show", audit_id=audit_id))
 
 
-@app.route('/audit/delete/<string:audit_id>', methods=['GET', 'POST'])
+@app.route('/delete/<string:audit_id>', methods=['GET', 'POST'])
 def delete(audit_id):
     if request.method == "GET":
         # Query to delete specific
-        mongo.db.form.remove({"_id": ObjectId(audit_id)})
-        return redirect(url_for('hello_world'))
+        audit = mongo.db.form.remove({"_id": ObjectId(audit_id)})
+        return redirect(url_for('hello_world', audit_id=audit_id))
+
 if __name__ == '__main__':
     app.run(port=5006,host='0.0.0.0', debug=True)
