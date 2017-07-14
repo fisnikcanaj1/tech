@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Show</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <style>
-
-    </style>
-  </head>
+{% extends 'layout.html'%}
+{% block body %}
   <body>
       <div class="container">
         	<div class="row">
@@ -17,7 +9,6 @@
                   <section class="container confirm-section text-center">
                     <h4>CONFIDENTIAL?</h4>
                     {{audit.confidential}}
-                    <p id="radio-error"></p>
                   </section>
                 <br/>
                 <br/>
@@ -196,12 +187,11 @@
                     </div>
                 </div>
                 <div class="submit">
-                    <a class="btn btn-info" href="/edit/audit/{{audit._id}}">Edit</a>
+                    <a class="btn btn-info" href="/audits/{{audit._id}}/edit">Edit</a>
                 </div>
               </form>
 
       		</div>
       	</div>
       </div>
-  </body>
-</html>
+{% endblock %}

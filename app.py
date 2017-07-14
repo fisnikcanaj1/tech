@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Response, Flask, render_template, json, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson import ObjectId
 app = Flask(__name__)
@@ -11,54 +11,100 @@ mongo = PyMongo(app)
 #def show(audit_id):
 
 @app.route('/', methods=['GET', 'POST'])
-def hello_world():
+def login():
+    if request.method == 'GET':
+        return render_template("index.html")
+
+@app.route('/audits', methods=['GET', 'POST'])
+def audits():
     if request.method == 'GET':
         audits = mongo.db.form.find()
-        return render_template('index.html', audits=audits)
+        return render_template('audits.html', audits=audits)
     elif request.method == 'POST':
         data = request.form
+        if data["confidential"] == "yes":
 
-        mongo.db.form.insert({
-            "confidential": data["confidential"],
-            "operator_name": data["operator_name"],
-            "occurrence": data["occurrence"],
-            "local": data["local"],
-            "flight_date": data["flight_date"],
-            "flight_number": data["flight_number"],
-            "departure": data["departure"],
-            "destination": data["destination"],
-            "aircraft_type": data["aircraft_type"],
-            "aircraft_registration": data["aircraft_registration"],
-            "location_of_occurrence": data["location_of_occurrence"],
-            "origin_of_the_goods": data["origin_of_the_goods"],
-            "description": data["description"],
-            "proper_shipping_name": data["proper_shipping_name"],
-            "class_division": data["class_division"],
-            "subsidary_risk": data["subsidary_risk"],
-            "packing_group": data["packing_group"],
-            "category": data["category"],
-            "type_of_packaging": data["type_of_packaging"],
-            "packaging_specification_marking": data["packaging_specification_marking"],
-            "no_of_packages": data["no_of_packages"],
-            "quantity": data["quantity"],
-            "reference_no": data["reference_no"],
-            "reference_ticket": data["reference_ticket"],
-            "name_and_adrress": data["name_and_adrress"],
-            "other_relevant_information": data["other_relevant_information"],
-            "name_and_title": data["name_and_title"],
-            "telephone_no": data["telephone_no"],
-            "company_dept_code": data["company_dept_code"],
-            "reporter_ref": data["reporter_ref"],
-            "address": data["address"],
-            "date_signature": data["date_signature"],
-            "description_of_the_occurrence": data["description_of_the_occurrence"]
+            mongo.db.form.insert({
+                "confidential": data["confidential"],
+                "operator_name": data["operator_name"],
+                "occurrence": data["occurrence"],
+                "local": data["local"],
+                "flight_date": data["flight_date"],
+                "flight_number": data["flight_number"],
+                "departure": data["departure"],
+                "destination": data["destination"],
+                "aircraft_type": data["aircraft_type"],
+                "aircraft_registration": data["aircraft_registration"],
+                "location_of_occurrence": data["location_of_occurrence"],
+                "origin_of_the_goods": data["origin_of_the_goods"],
+                "description": data["description"],
+                "proper_shipping_name": data["proper_shipping_name"],
+                "class_division": data["class_division"],
+                "subsidary_risk": data["subsidary_risk"],
+                "packing_group": data["packing_group"],
+                "category": data["category"],
+                "type_of_packaging": data["type_of_packaging"],
+                "packaging_specification_marking": data["packaging_specification_marking"],
+                "no_of_packages": data["no_of_packages"],
+                "quantity": data["quantity"],
+                "reference_no": data["reference_no"],
+                "reference_ticket": data["reference_ticket"],
+                "name_and_adrress": data["name_and_adrress"],
+                "other_relevant_information": data["other_relevant_information"],
+                "name_and_title": data["name_and_title"]
 
-        })
-
-        return redirect(url_for('hello_world'))
+                })
 
 
-@app.route('/audit/<string:audit_id>', methods=['GET', 'POST'])
+
+        else :
+
+            mongo.db.form.insert({
+                "confidential": data["confidential"],
+                "operator_name": data["operator_name"],
+                "occurrence": data["occurrence"],
+                "local": data["local"],
+                "flight_date": data["flight_date"],
+                "flight_number": data["flight_number"],
+                "departure": data["departure"],
+                "destination": data["destination"],
+                "aircraft_type": data["aircraft_type"],
+                "aircraft_registration": data["aircraft_registration"],
+                "location_of_occurrence": data["location_of_occurrence"],
+                "origin_of_the_goods": data["origin_of_the_goods"],
+                "description": data["description"],
+                "proper_shipping_name": data["proper_shipping_name"],
+                "class_division": data["class_division"],
+                "subsidary_risk": data["subsidary_risk"],
+                "packing_group": data["packing_group"],
+                "category": data["category"],
+                "type_of_packaging": data["type_of_packaging"],
+                "packaging_specification_marking": data["packaging_specification_marking"],
+                "no_of_packages": data["no_of_packages"],
+                "quantity": data["quantity"],
+                "reference_no": data["reference_no"],
+                "reference_ticket": data["reference_ticket"],
+                "name_and_adrress": data["name_and_adrress"],
+                "other_relevant_information": data["other_relevant_information"],
+                "name_and_title": data["name_and_title"],
+                "telephone_no": data["telephone_no"],
+                "company_dept_code": data["company_dept_code"],
+                "reporter_ref": data["reporter_ref"],
+                "address": data["address"],
+                "date_signature": data["date_signature"],
+                "description_of_the_occurrence": data["description_of_the_occurrence"]
+
+            })
+
+        return redirect(url_for('audits'))
+
+# @app.route('/audits', methods=['GET', 'POST'])
+# def audits():
+#     if request.methods == 'GET':
+#         audits = mongo.db.form.find()
+#         return render_template("audits.html", audits=audits)
+
+@app.route('/audits/<string:audit_id>', methods=['GET', 'POST'])
 def show(audit_id):
     if request.method == 'GET':
         # Query to get specific ocations
@@ -66,7 +112,7 @@ def show(audit_id):
         return render_template('show.html', audit=audit)
 
 # Editing audit
-@app.route('/edit/audit/<string:audit_id>', methods=['GET', 'POST'])
+@app.route('/audits/<string:audit_id>/edit', methods=['GET', 'POST'])
 def edit(audit_id):
     if request.method == 'GET':
 
@@ -80,14 +126,14 @@ def edit(audit_id):
             "occurrence": edit_data["occurrence"],
             "operator_name": edit_data["operator_name"],
             "local": edit_data["local"],
-            #"flight_date": edit_data["flight_date"],
-            #"flight_number": edit_data["flight_number"],
-            #"departure": edit_data["departure"],
-            #"destination": edit_data["destination"],
-            #"aircraft_type": edit_data["aircraft_type"],
-            #"aircraft_registration": edit_data["aircraft_registration"],
-            #"location_of_occurrence": edit_data["location_of_occurrence"],
-            #"origin_of_the_goods": edit_data["origin_of_the_goods"],
+            "flight_date": edit_data["flight_date"],
+            "flight_number": edit_data["flight_number"],
+            "departure": edit_data["departure"],
+            "destination": edit_data["destination"],
+            "aircraft_type": edit_data["aircraft_type"],
+            "aircraft_registration": edit_data["aircraft_registration"],
+            "location_of_occurrence": edit_data["location_of_occurrence"],
+            "origin_of_the_goods": edit_data["origin_of_the_goods"],
             #"description": edit_data["description"],
             #"proper_shipping_name": edit_data["proper_shipping_name"],
             #"class_division": edit_data["class_division"],
@@ -114,12 +160,14 @@ def edit(audit_id):
         return redirect(url_for("show", audit_id=audit_id))
 
 
-@app.route('/delete/<string:audit_id>', methods=['GET', 'POST'])
+@app.route('/audits/<string:audit_id>/delete', methods=['GET'])
 def delete(audit_id):
     if request.method == "GET":
         # Query to delete specific
         audit = mongo.db.form.remove({"_id": ObjectId(audit_id)})
-        return redirect(url_for('hello_world', audit_id=audit_id))
+        # return redirect(url_for('audits', audit_id=audit_id))
+        return Response(response=json.dumps({"success": "OK", "audit_id":audit_id}), status=200, mimetype="application/json")
+
 
 if __name__ == '__main__':
     app.run(port=5007,host='0.0.0.0', debug=True)

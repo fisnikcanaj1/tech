@@ -14,6 +14,13 @@ $(document).ready(function() {
       $("#address").prop("disabled", true);
       $("#reporter-ref").prop("disabled", true);
 
+      document.getElementById("company-dept-code").required = false;
+      document.getElementById("name-and-title").required = false;
+      $("#telephone-no").removeAttr('required');
+      $("#date-signature").removeAttr('required');
+      $("#address").removeAttr('required');
+      $("#reporter-ref").removeAttr('required');
+
     }
     else{
       //$(".main-form").fadeOut('slow/400/fast');
@@ -23,8 +30,15 @@ $(document).ready(function() {
       $("#date-signature").prop("disabled", false);
       $("#address").prop("disabled", false);
       $("#reporter-ref").prop("disabled", false);
+
+      $("#company-dept-code").prop("required", false)
+      $("#name-and-title").prop("required", false)
+      $("#telephone-no").prop("required", false);
+      $("#date-signature").prop("required", false);
+      $("#address").prop("required", false);
+      $("#reporter-ref").prop("required", false);
     }
-    
+
     if(radioValue =! null){
       $("#radio-error").html("");
     }

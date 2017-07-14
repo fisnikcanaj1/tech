@@ -1,38 +1,275 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Show</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <style>
-
-    </style>
-  </head>
-  <body>
-      <div class="container">
+{% extends 'layout.html'%}
+{% block body %}
+    <div class="container">
         	<div class="row">
         		<div class="well">
-              <table class="table">
-                <thead>
-                  <th>Confidential: </th>
-                  <th>Occurrence: </th>
-                  <th>Operator name: </th>
-                  <th>Local Date: </th>
-                  <th></th>
-                </thead>
                 <form method="POST">
-                <tbody>
-                 <td><input type="text" name="confidential" value="{{audit.confidential}}"></td>
-             		 <td><input type="text" name="occurrence" value="{{audit.occurrence}}"></td>
-                 <td><input type="text" name="operator_name" value="{{audit.operator_name}}"></td>
-                 <td><input type="date" name="local" value="{{audit.local}} "></td>
-                 <td><input type="submit" name="" value="Submit">
-                </tbody>
-              </table>
+                <section class="container form-section">
+                  <section class="container confirm-section text-center">
+                    <p>Are you concerned about the confidentiality of this report and wish to be contacted before it is processed?
+              If so, please ensure you provide us with your contact details.<p>
+                    <h4>CONFIDENTIAL?</h4>
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="confidential" value="{{audit.confidential}}" id="yes">
+                    <label for="no">No</label>
+                    <input type="radio" name="confidential" value="{{audit.confidential}}" id="no">
+                    <p id="radio-error"></p>
+                  </section>
+                <br/>
+                <br/>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-10" for="operator" title="Required">Operator: * </label>
+                      <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="An air operator's certificate (AOC) is the approval granted by a national"> ?</a>
+                    </div>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="operator_name" value="{{audit.operator_name}}" placeholder="Operator name" id="operator">
+                  </div>
 
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="occurrence" title="Required">Date of occurrence: * </label>
+                    <p class="error-message"></p>
+                    <input type="date" name="occurrence" value="{{audit.occurrence}}" class="form-control" id="occurrence">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="local" title="Required">Local time of occurrence: * </label>
+                    <p class="error-message"></p>
+                    <input type="time" name="local" value="{{audit.local}}" class="form-control" id="local">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="flight-date" title="Required">Flight date: * </label>
+                    <p class="error-message"></p>
+                    <input class="form-control" name="flight_date" value="{{audit.flight_date}}" type="datetime-local" id="flight-date"></input>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="flight-number" title="Required">Flight number: * </label>
+                    <p class="error-message"></p>
+                    <input type="number" class="form-control" name="flight_number" value="{{audit.flight_number}}" id="flight-number">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="departure" title="Required">Departure airport: * </label>
+                    <p class="error-message"></p>
+                    <select class="form-control" value="{{audit.departure}}" name="departure" id="departure">
+                      <option value="">Choose departure airport</option>
+                      <option value="Italy/Milano">Italy/Milano</option>
+                      <option value="Kosov/Prishtin">Kosov/Prishtin</option>
+                      <option value="Austri/Viena">Austri/Viena</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="destination" title="Required">Destination airport: * </label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="destination" id="destination">
+                      <option value="">Choose destination airport</option>
+                      <option value="
+                      Italy/Milano">Italy/Milano</option>
+                      <option value="Kosov/Prishtin">Kosov/Prishtin</option>
+                      <option value="Austri/Viena">Austri/Viena</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="aircraft-type" title="Required">Aircraft type: * </label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="aircraft_type" id="aircraft-type">
+                      <option value="">Choose aircraft type</option>
+                      <option value="Airbus A300">Airbus A300 medium-range widebody airliner</option>
+                      <option value="Airbus A310">Airbus A310 widebody airliner.</option>
+                      <option value="Airbus A318">Airbus A318 100-seat airliner</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="aircraft-registration" title="Required">Aircraft registration: * </label>
+                    <p class="error-message"></p>
+                    <input type="number" class="form-control" name="aircraft_registration" value="" id="aircraft-registration">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-6">
+                    <div class="row">
+                      <label for="location-of-occurrence" title="Required" class="col-xs-10">Location of occurrence: * </label>
+                      <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="An air operator's certificate (AOC) is the approval granted by a national"> ?</a>
+                    </div>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="location_of_occurrence" value="" id="location-of-occurrence">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-6">
+                    <label for="origin-of-the-goods" title="Required">Origin of the goods: * </label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="origin_of_the_goods" id="origin-of-the-goods">
+                      <option value="">Choose origin of the goods</option>
+                      <option value="Albania">Albania</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Australia">Italy</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 ">
+                    <label for="description" title="Required">Description: *</label>
+                    <p class="error-message"></p>
+                    <textarea name="description" class="form-control" rows="8" cols="80" id="description"></textarea>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4 col-sm-4">
+                    <label for="proper-shipping-name" title="Required">Proper shipping name: * </label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="proper_shipping_name" value="" id="proper-shipping-name">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4 col-sm-4">
+                    <label for="class-division">Class/division: </label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="class_division" id="class-division">
+                      <option value="">Choose class/division</option>
+                      <option value="division1">Division1</option>
+                      <option value="division2">Division2</option>
+                      <option value="division3">Division3</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="subsidary-risk">Subsidary risk(s): </label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="subsidary_risk" id="subsidary-risk">
+                      <option value="">Choose subsidary risk</option>
+                      <option value="division1">BATTERY FLUID</option>
+                      <option value="division2">ACID</option>
+                      <option value="division3">ADHESIVES</option>
+                      <option value="division3">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="packing-group" title="Required">Packing group: *</label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="packing_group" id="packing-group">
+                      <option value="">Choose packing group</option>
+                      <option value="division1">First</option>
+                      <option value="division2">Second</option>
+                      <option value="division3">Third</option>
+                      <option value="division3">Forth</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="category" title="Required" >Category, (class 7 only): *</label>
+                    <p class="error-message"></p>
+                    <select class="form-control" name="category" id="category">
+                      <option value="">Choose category</option>
+                      <option value="division1">First</option>
+                      <option value="division2">Second</option>
+                      <option value="division3">Third</option>
+                      <option value="division3">Forth</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="type-of-packaging" title="Required">Type of packaging: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="type_of_packaging" value="" id="type-of-packaging">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="packaging-specification-marking" title="Required">Packaging specification marking: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="packaging_specification_marking" value="" id="packaging-specification-marking">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="no-of-packages" title="Required">No. of packages: *</label>
+                    <p class="error-message"></p>
+                    <input type="number" class="form-control" name="no_of_packages" value="" id="no-of-packages">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="quantity">Quantity (or transport index, if applicable): </label>
+                    <p class="error-message"></p>
+                    <input type="number" class="form-control" name="quantity" value="" id="quantity">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="reference-no">Reference no. of Air Waybill: *</label>
+                    <p class="error-message"></p>
+                    <input type="number" class="form-control" title="Required" name="reference_no" value="" id="reference-no">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <div class="row">
+                      <label class="col-xs-10" for="reference-ticket" title="Required">Reference ticket: * </label>
+                      <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="Reference no. of courier pouch, baggage tag, or passenger ticket:"> ?</a>
+                    </div>
+                    <p class="error-message"></p>
+                    <input type="number" class="form-control" title="Required" name="reference_ticket" value="" id="reference-ticket">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="name-and-adrress" title="Required">Name and adrress of shipper, agent, passenger, etc.: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" name="name_and_adrress" class="form-control" value="" id="name-and-adrress">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="other-relevant-information">Other relevant information: </label>
+                    <p class="error-message"></p>
+                    <textarea name="other_relevant_information" class="form-control" rows="8" cols="80" id="other-relevant-information"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="name-and-title" title="Required">Name and title of person making report: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="name_and_title" value="" id="name-and-title">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="telephone-no" title="Required">Telephone no: *</label>
+                    <p class="error-message"></p>
+                    <input type="number" name="telephone_no" class="form-control" value="" id="telephone-no" >
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="company-dept-code">Company/dept. code, E-mail or InfoMail code: </label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="company_dept_code" value="" id="company-dept-code">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="reporter-ref" title="Required">Reporter ref.: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="reporter_ref" value=""  id="reporter-ref">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="address" title="Required">Address: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" name="address" class="form-control" value="" id="address">
+                  </div>
+                  <div class="form-group col-xs-12 col-sm-4">
+                    <label for="date-signature" title="Required">Date/Signature: *</label>
+                    <p class="error-message"></p>
+                    <input type="text" class="form-control" name="date_signature" value="" id="date-signature">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="description-of-the-occurrence ">Description of the occurrence (continuation):</label>
+                    <p class="error-message"></p>
+                    <textarea name="description_of_the_occurrence" class="form-control" id="description-of-the-occurrence" rows="8" cols="80"></textarea>
+                  </div>
+                </div>
+                <div class="submit">
+                    <input type="submit" class="btn btn-success" id="registation" name="" value="Submit">
+                </div>
+              </form>
 
       		</div>
       	</div>
       </div>
-  </body>
-</html>
+    {% endblock %}
