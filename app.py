@@ -160,13 +160,14 @@ def edit(audit_id):
         return redirect(url_for("show", audit_id=audit_id))
 
 
-@app.route('/audits/<string:audit_id>/delete', methods=['GET'])
-def delete(audit_id):
-    if request.method == "GET":
+@app.route('/audits/delete', methods=['POST'])
+def delete():
+    if request.method == "POST":
         # Query to delete specific
+        audit_id = request.form["audit_id"]
         audit = mongo.db.form.remove({"_id": ObjectId(audit_id)})
         # return redirect(url_for('audits', audit_id=audit_id))
-        return Response(response=json.dumps({"success": "OK", "audit_id":audit_id}), status=200, mimetype="application/json")
+        return Response(response=json.dumps({"success": "OK"}), status=200, mimetype="application/json")
 
 
 if __name__ == '__main__':

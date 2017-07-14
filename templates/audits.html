@@ -4,9 +4,10 @@
         $("body").on("click", "#delete", function(){
           var dataId = $(this).attr("data-id");
           $.ajax({
-            url: '/audits/'+dataId+"/delete",
-            type: 'GET',
+            url: '/audits/delete',
+            type: 'POST',
             dataType: 'json',
+            data: {"audit_id": dataId},
             success: function(data){
               $('#delete').parent().parent().remove();
             }
