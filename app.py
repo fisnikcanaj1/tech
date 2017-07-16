@@ -1,7 +1,8 @@
-from flask import Response, Flask, render_template, json, request, redirect, url_for
+from flask import Response, Flask, session, render_template, json, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson import ObjectId
 app = Flask(__name__)
+app.secret_key = "secret_key"
 
 app.config['MONGO_DBNAME'] = 'techsitution4'
 
@@ -22,81 +23,93 @@ def audits():
         return render_template('audits.html', audits=audits)
     elif request.method == 'POST':
         data = request.form
-        if data["confidential"] == "yes":
 
-            mongo.db.form.insert({
-                "confidential": data["confidential"],
-                "operator_name": data["operator_name"],
-                "occurrence": data["occurrence"],
-                "local": data["local"],
-                "flight_date": data["flight_date"],
-                "flight_number": data["flight_number"],
-                "departure": data["departure"],
-                "destination": data["destination"],
-                "aircraft_type": data["aircraft_type"],
-                "aircraft_registration": data["aircraft_registration"],
-                "location_of_occurrence": data["location_of_occurrence"],
-                "origin_of_the_goods": data["origin_of_the_goods"],
-                "description": data["description"],
-                "proper_shipping_name": data["proper_shipping_name"],
-                "class_division": data["class_division"],
-                "subsidary_risk": data["subsidary_risk"],
-                "packing_group": data["packing_group"],
-                "category": data["category"],
-                "type_of_packaging": data["type_of_packaging"],
-                "packaging_specification_marking": data["packaging_specification_marking"],
-                "no_of_packages": data["no_of_packages"],
-                "quantity": data["quantity"],
-                "reference_no": data["reference_no"],
-                "reference_ticket": data["reference_ticket"],
-                "name_and_adrress": data["name_and_adrress"],
-                "other_relevant_information": data["other_relevant_information"],
-                "name_and_title": data["name_and_title"]
+        mongo.db.form.insert({
+            "confidential": data["confidential"],
+            "operator_name": data["operator_name"],
+            "occurrence": data["occurrence"],
+            "local": data["local"],
+            "flight_date": data["flight_date"],
+            "flight_number": data["flight_number"],
+            "departure": data["departure"],
+            "destination": data["destination"],
+            "aircraft_type": data["aircraft_type"],
+            "aircraft_registration": data["aircraft_registration"],
+            "location_of_occurrence": data["location_of_occurrence"],
+            "origin_of_the_goods": data["origin_of_the_goods"],
+            "description": data["description"],
+            "proper_shipping_name": data["proper_shipping_name"],
+            "class_division": data["class_division"],
+            "subsidary_risk": data["subsidary_risk"],
+            "packing_group": data["packing_group"],
+            "category": data["category"],
+            "type_of_packaging": data["type_of_packaging"],
+            "packaging_specification_marking": data["packaging_specification_marking"],
+            "no_of_packages": data["no_of_packages"],
+            "quantity": data["quantity"],
+            "reference_no": data["reference_no"],
+            "reference_ticket": data["reference_ticket"],
+            "name_and_adrress": data["name_and_adrress"],
+            "other_relevant_information": data["other_relevant_information"],
+            "name_and_title": data["name_and_title"],
+            "telephone_no": data["telephone_no"],
+            "company_dept_code": data["company_dept_code"],
+            "reporter_ref": data["reporter_ref"],
+            "address": data["address"],
+            "date_signature": data["date_signature"],
+            "description_of_the_occurrence": data["description_of_the_occurrence"]
 
-                })
+        })
+        audit_id = mongo.db.form.find_one()
+
+        audit = mongo.db.form.find_one({'_id': ObjectId(audit_id["_id"])})
+
+        finalAPI = ({
+            "audit_id": str(audit["_id"]),
+            "confidential": data["confidential"],
+            "operator_name": data["operator_name"],
+            "occurrence": data["occurrence"],
+            "local": data["local"],
+            "flight_date": data["flight_date"],
+            "flight_number": data["flight_number"],
+            "departure": data["departure"],
+            "destination": data["destination"],
+            "aircraft_type": data["aircraft_type"],
+            "aircraft_registration": data["aircraft_registration"],
+            "location_of_occurrence": data["location_of_occurrence"],
+            "origin_of_the_goods": data["origin_of_the_goods"],
+            "description": data["description"],
+            "proper_shipping_name": data["proper_shipping_name"],
+            "class_division": data["class_division"],
+            "subsidary_risk": data["subsidary_risk"],
+            "packing_group": data["packing_group"],
+            "category": data["category"],
+            "type_of_packaging": data["type_of_packaging"],
+            "packaging_specification_marking": data["packaging_specification_marking"],
+            "no_of_packages": data["no_of_packages"],
+            "quantity": data["quantity"],
+            "reference_no": data["reference_no"],
+            "reference_ticket": data["reference_ticket"],
+            "name_and_adrress": data["name_and_adrress"],
+            "other_relevant_information": data["other_relevant_information"],
+            "name_and_title": data["name_and_title"],
+            "telephone_no": data["telephone_no"],
+            "company_dept_code": data["company_dept_code"],
+            "reporter_ref": data["reporter_ref"],
+            "address": data["address"],
+            "date_signature": data["date_signature"],
+            "description_of_the_occurrence": data["description_of_the_occurrence"]
+        })
 
 
-
-        else :
-
-            mongo.db.form.insert({
-                "confidential": data["confidential"],
-                "operator_name": data["operator_name"],
-                "occurrence": data["occurrence"],
-                "local": data["local"],
-                "flight_date": data["flight_date"],
-                "flight_number": data["flight_number"],
-                "departure": data["departure"],
-                "destination": data["destination"],
-                "aircraft_type": data["aircraft_type"],
-                "aircraft_registration": data["aircraft_registration"],
-                "location_of_occurrence": data["location_of_occurrence"],
-                "origin_of_the_goods": data["origin_of_the_goods"],
-                "description": data["description"],
-                "proper_shipping_name": data["proper_shipping_name"],
-                "class_division": data["class_division"],
-                "subsidary_risk": data["subsidary_risk"],
-                "packing_group": data["packing_group"],
-                "category": data["category"],
-                "type_of_packaging": data["type_of_packaging"],
-                "packaging_specification_marking": data["packaging_specification_marking"],
-                "no_of_packages": data["no_of_packages"],
-                "quantity": data["quantity"],
-                "reference_no": data["reference_no"],
-                "reference_ticket": data["reference_ticket"],
-                "name_and_adrress": data["name_and_adrress"],
-                "other_relevant_information": data["other_relevant_information"],
-                "name_and_title": data["name_and_title"],
-                "telephone_no": data["telephone_no"],
-                "company_dept_code": data["company_dept_code"],
-                "reporter_ref": data["reporter_ref"],
-                "address": data["address"],
-                "date_signature": data["date_signature"],
-                "description_of_the_occurrence": data["description_of_the_occurrence"]
-
-            })
-
-        return redirect(url_for('audits'))
+        return Response(
+            response=json.dumps({
+                "status": "success",
+                "audit": finalAPI
+                }),
+            status=200,
+            mimetype="application/json"
+            )
 
 # @app.route('/audits', methods=['GET', 'POST'])
 # def audits():
@@ -165,10 +178,11 @@ def delete():
     if request.method == "POST":
         # Query to delete specific
         audit_id = request.form["audit_id"]
+
         audit = mongo.db.form.remove({"_id": ObjectId(audit_id)})
         # return redirect(url_for('audits', audit_id=audit_id))
-        return Response(response=json.dumps({"success": "OK"}), status=200, mimetype="application/json")
+        return Response(response=json.dumps({"success": "OK", "audit_id": audit_id}), status=200, mimetype="application/json")
 
 
 if __name__ == '__main__':
-    app.run(port=5007,host='0.0.0.0', debug=True)
+    app.run(port=5008,host='0.0.0.0', debug=True)

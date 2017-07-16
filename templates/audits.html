@@ -1,18 +1,34 @@
 {% extends "layout.html" %}
 {% block body %}
     <script>
+    
         $("body").on("click", "#delete", function(){
           var dataId = $(this).attr("data-id");
+          var click = $(this);
           $.ajax({
             url: '/audits/delete',
             type: 'POST',
             dataType: 'json',
             data: {"audit_id": dataId},
             success: function(data){
-              $('#delete').parent().parent().remove();
+              $(click).parent().parent().remove();
             }
+
           });
         });
+
+        $('body').on('click', '#btn-submit', function(e){
+
+        //AJAX call request POST
+
+            $.post('/audits', $('#form').serialize(), function(data){
+
+              $("tbody").append("<tr><td>" + data.audit.confidential + "</td><td>" + data.audit.operator_name + "</td><td>" + data.audit.local + "</td><td class='text-center'><a class='btn btn-success' href='/audits/" + data.audit.audit_id + "'>View</a><button id='delete' class='btn btn-danger' data-id=" + data.audit.audit_id + ">Delete</button></td></tr>");
+
+            });
+            e.preventDefault();
+          });
+
     </script>
 
     <header>
@@ -20,7 +36,7 @@
     </header>
 
 
-      <form class="main-form" data-parsley-validate="" method="POST">
+      <form id="form" class="main-form" data-parsley-validate="" method="POST">
         <section class="container form-section">
             <section class="container confirm-section text-center">
               <p>Are you concerned about the confidentiality of this report and wish to be contacted before it is processed?
@@ -259,7 +275,7 @@
               <div class="form-group col-xs-12 col-sm-4">
                 <label for="address" title="Required">Address: *</label>
                 <p class="error-message"></p>
-                <input type="text" name="address" class="form-control" value="" data-parsley-trigger="change" required="" id="address">
+                <input type="text" name="address" class="form-control" value="" data-parsley-trigger="change" id="address">
               </div>
               <div class="form-group col-xs-12 col-sm-4">
                 <label for="date-signature" title="Required">Date/Signature: *</label>
@@ -275,7 +291,7 @@
               </div>
             </div>
             <div class="submit">
-            <input type="submit" class="btn btn-success" id="registation" name="submit" value="Submit"/>
+            <input type="submit" class="btn btn-success" id="btn-submit" name="submit" value="Submit"/>
           </div>
         </section>
       </form>
@@ -296,7 +312,7 @@
                     <td>{{ audit.confidential}}</td>
                     <td>{{ audit.operator_name }}</td>
                     <td>{{ audit.local}}</td>
-                    <td class="text-center"><a class="btn btn-success" href="/audits/{{audit._id}}">View</a> <button id="delete" data-id="{{audit._id}}" class="btn btn-danger">Delete</button></td>
+                    <td class="text-center"><a class="btn btn-success" id="btnSubmit" href="/audits/{{audit._id}}">View</a> <button id="delete" data-id="{{audit._id}}" class="btn btn-danger">Delete</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
