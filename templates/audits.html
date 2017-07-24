@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
     <script>
-    
+
         $("body").on("click", "#delete", function(){
           var dataId = $(this).attr("data-id");
           var click = $(this);
@@ -22,9 +22,9 @@
         //AJAX call request POST
 
             $.post('/audits', $('#form').serialize(), function(data){
+              var dataId = $(this).attr("data-id");
 
-              $("tbody").append("<tr><td>" + data.audit.confidential + "</td><td>" + data.audit.operator_name + "</td><td>" + data.audit.local + "</td><td class='text-center'><a class='btn btn-success' href='/audits/" + data.audit.audit_id + "'>View</a><button id='delete' class='btn btn-danger' data-id=" + data.audit.audit_id + ">Delete</button></td></tr>");
-
+              $("tbody").append("<tr ><td>" + data.audit.confidential + "</td><td>" + data.audit.operator_name + "</td><td>" + data.audit.local + "</td><td class='text-center'><a class='btn btn-success' href='/audits/" + data.audit.audit_id + "'>View</a><button id='delete' class='btn btn-danger' data-id=" + data.audit.audit_id + ">Delete</button></td></tr>");
             });
             e.preventDefault();
           });
@@ -34,8 +34,6 @@
     <header>
         <h1 class="text-center">Dangerous Goods Occurrence Repost</h1>
     </header>
-
-
       <form id="form" class="main-form" data-parsley-validate="" method="POST">
         <section class="container form-section">
             <section class="container confirm-section text-center">
@@ -231,7 +229,7 @@
               <div class="form-group col-xs-12 col-sm-4">
                 <div class="row">
                   <label class="col-xs-10" for="reference-ticket" title="Required">Reference ticket: * </label>
-                  <a href="#info" class="col-xs-2 text-center" data-toggle="tooltip" data-placement="top" title="Reference no. of courier pouch, baggage tag, or passenger ticket:"> ?</a>
+                  <a href="#info" class="col-xs-2 text-center"  data-toggle="tooltip" data-placement="top" title="Reference no. of courier pouch, baggage tag, or passenger ticket:"> ?</a>
                 </div>
                 <p class="error-message"></p>
                 <input type="number" class="form-control" title="Required" name="reference_ticket" value="" ata-parsley-trigger="change" required="" id="reference-ticket">
@@ -239,7 +237,7 @@
               <div class="form-group col-xs-12 col-sm-4">
                 <label for="name-and-adrress" title="Required">Name and adrress of shipper, agent, passenger, etc.: *</label>
                 <p class="error-message"></p>
-                <input type="text" name="name_and_adrress" class="form-control" value="" data-parsley-trigger="change" required="" id="name-and-adrress">
+                <input type="text" name="name_and_adrress" class="form-control" value="" data-parsley-trigger="change" required="" value="" id="name-and-adrress">
               </div>
             </div>
             <div class="row">

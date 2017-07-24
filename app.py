@@ -24,7 +24,7 @@ def audits():
     elif request.method == 'POST':
         data = request.form
 
-        mongo.db.form.insert({
+        current_audit = mongo.db.form.insert({
             "confidential": data["confidential"],
             "operator_name": data["operator_name"],
             "occurrence": data["occurrence"],
@@ -60,45 +60,43 @@ def audits():
             "description_of_the_occurrence": data["description_of_the_occurrence"]
 
         })
-        audit_id = mongo.db.form.find_one()
 
-        audit = mongo.db.form.find_one({'_id': ObjectId(audit_id["_id"])})
-
+        audit = mongo.db.form.find_one({"_id": current_audit})
         finalAPI = ({
             "audit_id": str(audit["_id"]),
-            "confidential": data["confidential"],
-            "operator_name": data["operator_name"],
-            "occurrence": data["occurrence"],
-            "local": data["local"],
-            "flight_date": data["flight_date"],
-            "flight_number": data["flight_number"],
-            "departure": data["departure"],
-            "destination": data["destination"],
-            "aircraft_type": data["aircraft_type"],
-            "aircraft_registration": data["aircraft_registration"],
-            "location_of_occurrence": data["location_of_occurrence"],
-            "origin_of_the_goods": data["origin_of_the_goods"],
-            "description": data["description"],
-            "proper_shipping_name": data["proper_shipping_name"],
-            "class_division": data["class_division"],
-            "subsidary_risk": data["subsidary_risk"],
-            "packing_group": data["packing_group"],
-            "category": data["category"],
-            "type_of_packaging": data["type_of_packaging"],
-            "packaging_specification_marking": data["packaging_specification_marking"],
-            "no_of_packages": data["no_of_packages"],
-            "quantity": data["quantity"],
-            "reference_no": data["reference_no"],
-            "reference_ticket": data["reference_ticket"],
-            "name_and_adrress": data["name_and_adrress"],
-            "other_relevant_information": data["other_relevant_information"],
-            "name_and_title": data["name_and_title"],
-            "telephone_no": data["telephone_no"],
-            "company_dept_code": data["company_dept_code"],
-            "reporter_ref": data["reporter_ref"],
-            "address": data["address"],
-            "date_signature": data["date_signature"],
-            "description_of_the_occurrence": data["description_of_the_occurrence"]
+            "confidential": audit["confidential"],
+            "operator_name": audit["operator_name"],
+            "occurrence": audit["occurrence"],
+            "local": audit["local"],
+            "flight_date": audit["flight_date"],
+            "flight_number": audit["flight_number"],
+            "departure": audit["departure"],
+            "destination": audit["destination"],
+            "aircraft_type": audit["aircraft_type"],
+            "aircraft_registration": audit["aircraft_registration"],
+            "location_of_occurrence": audit["location_of_occurrence"],
+            "origin_of_the_goods": audit["origin_of_the_goods"],
+            "description": audit["description"],
+            "proper_shipping_name": audit["proper_shipping_name"],
+            "class_division": audit["class_division"],
+            "subsidary_risk": audit["subsidary_risk"],
+            "packing_group": audit["packing_group"],
+            "category": audit["category"],
+            "type_of_packaging": audit["type_of_packaging"],
+            "packaging_specification_marking": audit["packaging_specification_marking"],
+            "no_of_packages": audit["no_of_packages"],
+            "quantity": audit["quantity"],
+            "reference_no": audit["reference_no"],
+            "reference_ticket": audit["reference_ticket"],
+            "name_and_adrress": audit["name_and_adrress"],
+            "other_relevant_information": audit["other_relevant_information"],
+            "name_and_title": audit["name_and_title"],
+            "telephone_no": audit["telephone_no"],
+            "company_dept_code": audit["company_dept_code"],
+            "reporter_ref": audit["reporter_ref"],
+            "address": audit["address"],
+            "date_signature": audit["date_signature"],
+            "description_of_the_occurrence": audit["description_of_the_occurrence"]
         })
 
 
@@ -106,7 +104,7 @@ def audits():
             response=json.dumps({
                 "status": "success",
                 "audit": finalAPI
-                }),
+            }),
             status=200,
             mimetype="application/json"
             )
@@ -185,4 +183,4 @@ def delete():
 
 
 if __name__ == '__main__':
-    app.run(port=5008,host='0.0.0.0', debug=True)
+    app.run(port=5010,host='0.0.0.0', debug=True)
